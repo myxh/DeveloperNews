@@ -1,0 +1,94 @@
+apply plugin: 'com.android.application'
+//********************************开始***************************************************************
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'android-apt'
+
+/*buildscript {
+    repositories {
+        mavenCentral()
+
+    }
+
+    dependencies {
+        classpath 'me.tatarka:gradle-retrolambda:3.2.3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+    }
+}
+
+repositories {
+    mavenCentral()
+}*/
+//********************************结束***************************************************************
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+
+    defaultConfig {
+        applicationId "com.myxh.developernews"
+        minSdkVersion 17
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:design:24.0.0'
+    /** *********************************************************************/
+    compile 'com.github.johnkil.android-progressfragment:progressfragment:1.4.+'
+    //日志库
+    compile 'com.orhanobut:logger:1.15'
+    //OkHttp
+    compile 'com.squareup.okhttp3:okhttp:3.4.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    //json解析库
+    compile 'com.google.code.gson:gson:2.7'
+    //dagger2依赖注入库
+    compile 'com.google.dagger:dagger:2.5'
+    apt 'com.google.dagger:dagger-compiler:2.5'
+    //retrofit网络请求库
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    //RxJava
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.7'
+    compile 'com.artemzin.rxjava:proguard-rules:1.1.7.0'
+    //事件总线
+    compile 'org.greenrobot:eventbus:3.0.0'
+    //图片加载库
+    compile 'com.facebook.fresco:fresco:0.12.0'
+    //下拉刷新库
+    compile 'com.cjj.materialrefeshlayout:library:1.3.0'
+    //RecycleView分割线
+    compile 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+    //
+    compile 'com.github.d-max:spots-dialog:0.7'
+    compile 'com.github.mrengineer13:snackbar:1.2.0'
+    compile 'cn.pedant.sweetalert:library:1.3'
+    //滑动返回
+    compile 'me.imid.swipebacklayout.lib:library:1.0.0'
+    //ButterKnife注解库
+    compile 'com.jakewharton:butterknife:8.4.0'
+    apt 'com.jakewharton:butterknife-compiler:8.4.0'
+
+    //拖动排序
+    compile('com.h6ah4i.android.widget.advrecyclerview:advrecyclerview:0.8.5@aar') {
+        transitive = true
+    }
+}

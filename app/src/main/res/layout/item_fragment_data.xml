@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:layout_marginLeft="@dimen/app_item_paddingLR"
+    android:layout_marginRight="@dimen/app_item_paddingLR"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/item_fra_data_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_type_csdn"/>
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:paddingStart="@dimen/item_data_paddingLeft"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_fra_data_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="雅虎开源的一系列 UI 组件，目前只放出了图片选择器组件，做的相当棒，期待雅虎更多的分析。"/>
+
+        <TextView
+            android:id="@+id/item_fra_data_who"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/darker_gray"
+            tools:text="myxh"/>
+
+    </LinearLayout>
+
+</LinearLayout>
