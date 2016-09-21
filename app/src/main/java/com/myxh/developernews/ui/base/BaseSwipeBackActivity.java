@@ -13,7 +13,7 @@ import me.imid.swipebacklayout.lib.app.SwipeBackActivityHelper;
 /**
  * Created by asus on 2016/9/13.
  */
-public class BaseSwipeBackActivity extends ToolbarActivity implements SwipeBackActivityBase {
+public abstract class BaseSwipeBackActivity extends ToolbarActivity implements SwipeBackActivityBase {
 
     private SwipeBackActivityHelper mHelper;
 

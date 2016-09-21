@@ -8,10 +8,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.activity.MainActivity">
 
-    <include
-        layout="@layout/include_main_appbar"
-        android:layout_height="match_parent"
-        android:layout_width="match_parent"/>
+    <FrameLayout
+        android:id="@+id/main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <android.support.design.widget.NavigationView
         android:id="@+id/main_nav"

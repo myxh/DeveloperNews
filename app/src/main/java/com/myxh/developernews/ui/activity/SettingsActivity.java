@@ -18,6 +18,11 @@ public class SettingsActivity extends BaseSwipeBackActivity {
     }
 
     @Override
+    protected int getContentViewId() {
+        return 0;
+    }
+
+    @Override
     public void setToolbarTitle(CharSequence title) {
         super.setToolbarTitle(title);
     }

@@ -27,7 +27,7 @@ public class CategoryDataViewModel extends AbstractViewModel {
 
     public CategoryDataViewModel() {
         Log.i(TAG,"CategoryDataViewModel构造函数-----------------------------------------------");
-        MyApplication.getAppContext().getGankComponent().inject(this);
+        MyApplication.getAppContext().getDataComponent().inject(this);
     }
 
     @Override

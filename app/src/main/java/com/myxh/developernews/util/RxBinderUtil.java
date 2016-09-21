@@ -1,13 +1,12 @@
 package com.myxh.developernews.util;
 
-import com.orhanobut.logger.Logger;
+import android.util.Log;
 
 import rx.Observable;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -31,11 +30,11 @@ public class RxBinderUtil {
         compositeSubscription.add(subscribeSetter(observable,setter,tag));
     }
 
-    private <U>Subscription subscribeSetter(final Observable<U> observable,
+    private static <U>Subscription subscribeSetter(final Observable<U> observable,
                                             final Action1<U> setter,
                                             final String tag) {
         return observable
-                .subscribeOn(Schedulers.io())
+//                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SetterSubscriber<U>(setter,tag));
     }
@@ -52,12 +51,12 @@ public class RxBinderUtil {
 
         @Override
         public void onCompleted() {
-            Logger.i(tag+"onCompleted()...");
+            Log.i(tag,"onCompleted()...");
         }
 
         @Override
         public void onError(Throwable e) {
-            Logger.i(tag+"onError()...");
+            Log.i(tag,"onError()...");
             setter.call(null);
         }
 

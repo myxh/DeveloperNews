@@ -15,4 +15,9 @@ public class VideoActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
     }
+
+    @Override
+    protected int getContentViewId() {
+        return 0;
+    }
 }

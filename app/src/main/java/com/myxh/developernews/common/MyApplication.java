@@ -12,18 +12,18 @@ import com.facebook.drawee.backends.pipeline.Fresco;
 public class MyApplication extends Application {
 
     private static MyApplication appContext;
-    private GankComponent gankComponent;
+    private DataComponent mDataComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         appContext = this;
-        gankComponent = GankComponent.Initializer.init();
+        mDataComponent = DataComponent.Initializer.init();
         Fresco.initialize(this);
     }
 
-    public GankComponent getGankComponent() {
-        return gankComponent;
+    public DataComponent getDataComponent() {
+        return mDataComponent;
     }
 
     public static MyApplication getAppContext() {

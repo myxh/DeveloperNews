@@ -15,4 +15,9 @@ public class GirlActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_girl);
     }
+
+    @Override
+    protected int getContentViewId() {
+        return 0;
+    }
 }

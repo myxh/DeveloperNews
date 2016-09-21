@@ -39,6 +39,11 @@
     <string name="gank_ExtendResource">拓展资源</string>
     <string name="gank_App">App</string>
     <string name="action_hot">热门</string>
+    <string name="action_sort">排序</string>
+    <string name="gank">干货</string>
+    <string name="hot">热门</string>
+    <string name="network_not_conntected">网络未连接，前往设置？</string>
+    <string name="tips">温馨提示</string>
 
 
 </resources>

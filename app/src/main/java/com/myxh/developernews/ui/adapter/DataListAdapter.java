@@ -36,7 +36,7 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    public void addDaas(List<Gank> datas) {
+    public void addDatas(List<Gank> datas) {
         this.datas.addAll(datas);
         notifyDataSetChanged();
     }
@@ -75,26 +75,27 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public int getItemViewType(int position) {
         return TYPE_ITEM;
     }
-}
 
-class DataHeaderViewHolder extends RecyclerView.ViewHolder{
-    public TextView date;
+    class DataHeaderViewHolder extends RecyclerView.ViewHolder{
+        public TextView date;
 
-    public DataHeaderViewHolder(View itemView) {
-        super(itemView);
-        date = (TextView) itemView.findViewById(R.id.item_fra_header_date);
+        public DataHeaderViewHolder(View itemView) {
+            super(itemView);
+            date = (TextView) itemView.findViewById(R.id.item_fra_header_date);
+        }
     }
-}
 
-class DataItemViewHolder extends RecyclerView.ViewHolder {
-    public ImageView itemIcon;
-    public TextView itemTitle;
-    public TextView itemWho;
+    class DataItemViewHolder extends RecyclerView.ViewHolder {
+        public ImageView itemIcon;
+        public TextView itemTitle;
+        public TextView itemWho;
 
-    public DataItemViewHolder(View itemView) {
-        super(itemView);
-        itemIcon = (ImageView) itemView.findViewById(R.id.item_fra_data_icon);
-        itemTitle = (TextView) itemView.findViewById(R.id.item_fra_data_title);
-        itemWho = (TextView) itemView.findViewById(R.id.item_fra_data_who);
+        public DataItemViewHolder(View itemView) {
+            super(itemView);
+            itemIcon = (ImageView) itemView.findViewById(R.id.item_fra_data_icon);
+            itemTitle = (TextView) itemView.findViewById(R.id.item_fra_data_title);
+            itemWho = (TextView) itemView.findViewById(R.id.item_fra_data_who);
+        }
     }
+
 }

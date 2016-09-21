@@ -6,6 +6,7 @@ import com.myxh.developernews.GankDataType;
 import com.myxh.developernews.bean.CategoryData;
 import com.myxh.developernews.bean.Gank;
 import com.myxh.developernews.bean.GankData;
+import com.myxh.developernews.bean.ZhihuHotData;
 import com.myxh.developernews.util.UrlUtil;
 
 import java.util.concurrent.TimeUnit;
@@ -27,6 +28,7 @@ public class NetworkRequest {
 
     private static final String TAG = "NetworkRequest";
     private GankApi gankApi;
+    private ZhihuApi mZhihuApi;
 
     public NetworkRequest() {
         Log.i(TAG,"NetworkRequest构造函数-----------------------------------------");
@@ -45,8 +47,15 @@ public class NetworkRequest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
+        Retrofit zhihuRetrofit = new Retrofit.Builder()
+                .baseUrl(UrlUtil.ZHIHU_BASIC_URL)
+                .client(okHttpClient)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
 
         gankApi = gankRetrofit.create(GankApi.class);
+        mZhihuApi = zhihuRetrofit.create(ZhihuApi.class);
 
         /*gankApi.getCategoryData(GankDataType.TYPE_ANDROID,10,1)
                 .subscribeOn(Schedulers.io())
@@ -104,4 +113,7 @@ public class NetworkRequest {
         return gankApi.getCategoryData(type, limit, page);
     }
 
+    public Observable<ZhihuHotData> getZhihuHotData() {
+        return mZhihuApi.getZhihuHotData();
+    }
 }

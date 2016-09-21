@@ -15,4 +15,9 @@ public class CollectionActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_collection);
     }
+
+    @Override
+    protected int getContentViewId() {
+        return 0;
+    }
 }

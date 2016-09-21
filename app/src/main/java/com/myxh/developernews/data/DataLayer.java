@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.myxh.developernews.bean.CategoryData;
 import com.myxh.developernews.bean.GankData;
+import com.myxh.developernews.bean.ZhihuHotData;
 import com.myxh.developernews.network.NetworkRequest;
 
 import rx.Observable;
@@ -40,6 +41,15 @@ public class DataLayer {
         return observable;
     }
 
+    public Observable<ZhihuHotData> getZhihuHotData() {
+        Log.i(TAG, "getZhihuHotData: ------------------------------");
+        Observable<ZhihuHotData> observable = networkRequest.getZhihuHotData();
+        observable
+                .subscribeOn(Schedulers.io())
+                .observeOn(Schedulers.io());
+        return observable;
+    }
+
     public static interface GankDataStore
     {
         Observable<GankData> call(int year, int month, int day);
@@ -48,6 +58,11 @@ public class DataLayer {
     public static interface CategoryDataStore
     {
         Observable<CategoryData> call(String type, int limit, int page);
+    }
+
+    public static interface ZhihuHotDataStore
+    {
+        Observable<ZhihuHotData> call();
     }
 
 }

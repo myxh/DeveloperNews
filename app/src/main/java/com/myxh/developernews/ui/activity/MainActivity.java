@@ -2,56 +2,79 @@ package com.myxh.developernews.ui.activity;
 
 import android.graphics.Color;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.myxh.developernews.GankDataType;
 import com.myxh.developernews.R;
-import com.myxh.developernews.ui.adapter.TabViewPagerAdapter;
 import com.myxh.developernews.ui.base.BaseActivity;
-import com.myxh.developernews.ui.fragment.DataFragment;
+import com.myxh.developernews.ui.fragment.CollectionFragment;
+import com.myxh.developernews.ui.fragment.HomeFragment;
+import com.myxh.developernews.ui.fragment.HotFragment;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar mToolbar;
-    private DrawerLayout drawer;
-    private NavigationView mNavigationView;
-    private TabLayout mTabLayout;
+    public static final String KEY_STATUS_FRAGMENT_INDEX = "key_status_fragment_index";
+
+    @BindView(R.id.main_content)
+    FrameLayout mMainContent;
+    @BindView(R.id.main_nav)
+    NavigationView mNavigationView;
+    @BindView(R.id.main_drawer)
+    DrawerLayout drawer;
 
     private SimpleDraweeView navAvatar;
     private TextView navNickname;
     private TextView navUsername;
+
+    //记录第一次点击Back键时间
     private long firstTime;
+    //当前Fragment序号
+    private int currentFragmentIndex;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         initUI();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new HomeFragment()).commit();
     }
 
-    private void initToolbar() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (mToolbar != null) {
-            setSupportActionBar(mToolbar);
+    public void replaceFragment() {
+        switch (currentFragmentIndex) {
+            case 0:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new HomeFragment()).commit();
+                break;
+            case 1:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new HotFragment()).commit();
+                break;
+            case 2:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new CollectionFragment()).commit();
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
         }
-//        mToolbar.setNavigationIcon(R.mipmap.drawer_menu_icon);
-        mToolbar.setTitle(getString(R.string.app_name));//设置主标题
     }
 
-
-    private void initUI(){
+    private void initUI() {
 
         //设置透明状态栏
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -59,69 +82,63 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
         }
 
-        initToolbar();
-        initDrawer();
         initNavigationView();
-        initTabs();
     }
 
-    private void initDrawer() {
+    @Override
+    public void setSupportActionBar(@Nullable Toolbar toolbar) {
+        super.setSupportActionBar(toolbar);
+        initDrawer(toolbar);
+    }
+
+    private void initDrawer(Toolbar toolbar) {
         drawer = (DrawerLayout) findViewById(R.id.main_drawer);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer,mToolbar,R.string.drawer_open,R.string.drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.drawer_open, R.string.drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
     }
 
     private void initNavigationView() {
-        mNavigationView = (NavigationView) findViewById(R.id.main_nav);
         mNavigationView.setNavigationItemSelectedListener(this);
         this.navAvatar = (SimpleDraweeView) mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_iv_avatar);
         this.navNickname = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_tv_nickname);
         this.navUsername = (TextView) mNavigationView.getHeaderView(0).findViewById(R.id.nav_header_tv_username);
     }
 
-    private void initTabs(){
-        ViewPager mViewPager = (ViewPager) findViewById(R.id.main_app_bar_viewpager);
-        TabViewPagerAdapter viewPagerAdapter = new TabViewPagerAdapter(getSupportFragmentManager());
-
-        DataFragment androidFragment = DataFragment.newFragment(GankDataType.TYPE_ANDROID);
-        DataFragment iosFragment = DataFragment.newFragment(GankDataType.TYPE_IOS);
-        DataFragment frontendFragment = DataFragment.newFragment(GankDataType.TYPE_FRONT_END);
-        DataFragment recommendFragment = DataFragment.newFragment(GankDataType.TYPE_RECOMMEND);
-        DataFragment extendFragment = DataFragment.newFragment(GankDataType.TYPE_RESOURCES);
-        DataFragment appFragment = DataFragment.newFragment(GankDataType.TYPE_APP);
-        //添加Fragment
-        viewPagerAdapter.addFragment(androidFragment, getString(R.string.gank_Android));
-        viewPagerAdapter.addFragment(iosFragment, getString(R.string.gank_iOS));
-        viewPagerAdapter.addFragment(frontendFragment, getString(R.string.gank_FrontEnd));
-        viewPagerAdapter.addFragment(recommendFragment, getString(R.string.gank_recommend));
-        viewPagerAdapter.addFragment(extendFragment, getString(R.string.gank_ExtendResource));
-        viewPagerAdapter.addFragment(appFragment, getString(R.string.gank_App));
-        mViewPager.setAdapter(viewPagerAdapter);//设置适配器
-
-        mTabLayout = (TabLayout) findViewById(R.id.main_app_bar_tab);
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_Android)));//给TabLayout添加Tab
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_iOS)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_FrontEnd)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_recommend)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_ExtendResource)));
-        mTabLayout.addTab(mTabLayout.newTab().setText(getString(R.string.gank_App)));
-        mTabLayout.setupWithViewPager(mViewPager);
-    }
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         item.setChecked(true);
         switch (item.getItemId()) {
             case R.id.nav_home:
+                currentFragmentIndex = 0;
+                replaceFragment();
+                drawer.closeDrawer(GravityCompat.START);
+                item.setChecked(true);
                 break;
             case R.id.nav_hot:
+                currentFragmentIndex = 1;
+                replaceFragment();
+                drawer.closeDrawer(GravityCompat.START);
+                item.setChecked(true);
                 break;
             case R.id.nav_collection:
+                currentFragmentIndex = 2;
+                replaceFragment();
+                drawer.closeDrawer(GravityCompat.START);
+                item.setChecked(true);
                 break;
             case R.id.nav_girl:
+                currentFragmentIndex = 3;
+                replaceFragment();
+                drawer.closeDrawer(GravityCompat.START);
+                item.setChecked(true);
                 break;
             case R.id.nav_video:
+                currentFragmentIndex = 4;
+                replaceFragment();
+                drawer.closeDrawer(GravityCompat.START);
+                item.setChecked(true);
                 break;
             case R.id.nav_settings:
                 openActivity(SettingsActivity.class);

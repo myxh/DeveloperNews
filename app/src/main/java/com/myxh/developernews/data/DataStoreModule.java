@@ -20,6 +20,11 @@ public class DataStoreModule {
         return dataLayer::getCategoryData;
     }
 
+    @Provides
+    public DataLayer.ZhihuHotDataStore getZhihuHotData(DataLayer dataLayer) {
+        return dataLayer::getZhihuHotData;
+    }
+
     @Singleton
     @Provides
     public DataLayer provideDataLayer() {

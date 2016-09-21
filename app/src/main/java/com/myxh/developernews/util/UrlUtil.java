@@ -9,6 +9,8 @@ public class UrlUtil {
 
     public static final String GANK_BASE_URL = "http://gank.io/api/";
 
+    public static final String ZHIHU_BASIC_URL = "http://news-at.zhihu.com/api/";
+
     public static int getUrlIcon(String url) {
         if (url.contains("github")) {
             return R.drawable.ic_type_github;
