@@ -11,7 +11,21 @@
  - ShareSDK第三方分享
 
 ##ScreenShots
-![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/0.png)![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/1.png)
+![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/0.png)
+
+![热门](https://github.com/myxh/DeveloperNews/blob/master/screenshots/1.png)
+
+![妹纸](https://github.com/myxh/DeveloperNews/blob/master/screenshots/3.png)
+
+![热门详情](https://github.com/myxh/DeveloperNews/blob/master/screenshots/9.png)
+
+![热门详情](https://github.com/myxh/DeveloperNews/blob/master/screenshots/10.png)
+
+![滑动返回](https://github.com/myxh/DeveloperNews/blob/master/screenshots/11.png)
+
+![分享](https://github.com/myxh/DeveloperNews/blob/master/screenshots/6.png)
+
+![妹纸大图](https://github.com/myxh/DeveloperNews/blob/master/screenshots/12.png)
 
 
 
