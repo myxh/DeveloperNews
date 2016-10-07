@@ -1,7 +1,7 @@
 # DeveloperNews
 一款Material Design风格的资讯类App，采用RxJava+Retrofit+Dagger2构建，采用了MVVM架构，网络数据来自干货集中营和知乎.
 
-##Library
+#Library
  - RxJava + Retrofit + Dagger2构建的MVVM架构
  - SwipeBackLayout滑动返回
  - CoordinatorLayout构建视差界面
@@ -11,7 +11,7 @@
  - MaterialRefreshLayout下拉刷新
  - ShareSDK第三方分享
 
-##ScreenShots
+#ScreenShots
 ![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/0.png)
 
 ![热门](https://github.com/myxh/DeveloperNews/blob/master/screenshots/1.png)
@@ -28,10 +28,10 @@
 
 ![妹纸大图](https://github.com/myxh/DeveloperNews/blob/master/screenshots/12.png)
 
-[更多](https://github.com/myxh/DeveloperNews/tree/master/screenshots)
+####[更多](https://github.com/myxh/DeveloperNews/tree/master/screenshots)
 
 
-##License
+#License
 >Copyright 2016 myxh
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
