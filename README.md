@@ -27,7 +27,7 @@
 
 ![妹纸大图](https://github.com/myxh/DeveloperNews/blob/master/screenshots/12.png)
 
-
+[更多](https://github.com/myxh/DeveloperNews/tree/master/screenshots)
 
 
 ##License
