@@ -4,6 +4,7 @@
 ##Library
  - RxJava + Retrofit + Dagger2构建的MVVM架构
  - SwipeBackLayout滑动返回
+ - CoordinatorLayout构建视差界面
  - OkHttp
  - ButterKnife注解绑定
  - Fresco图片加载
