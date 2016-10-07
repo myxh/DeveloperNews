@@ -2,10 +2,10 @@ package com.myxh.developernews.network;
 
 import android.util.Log;
 
-import com.myxh.developernews.GankDataType;
+import com.myxh.developernews.bean.AndroidData;
 import com.myxh.developernews.bean.CategoryData;
-import com.myxh.developernews.bean.Gank;
 import com.myxh.developernews.bean.GankData;
+import com.myxh.developernews.bean.ZhihuDetailData;
 import com.myxh.developernews.bean.ZhihuHotData;
 import com.myxh.developernews.util.UrlUtil;
 
@@ -57,52 +57,6 @@ public class NetworkRequest {
         gankApi = gankRetrofit.create(GankApi.class);
         mZhihuApi = zhihuRetrofit.create(ZhihuApi.class);
 
-        /*gankApi.getCategoryData(GankDataType.TYPE_ANDROID,10,1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CategoryData>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG,"onCompleted()");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e(TAG,"onError()");
-                    }
-
-                    @Override
-                    public void onNext(CategoryData categoryData) {
-                        if (categoryData != null) {
-                            for (Gank gank : categoryData.getDataList()) {
-                                Log.i(TAG,gank.getType()+":"+gank.getDesc());
-                            }
-                        }
-                    }
-                });*/
-        gankApi.getAndroidData(10,1)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<CategoryData>() {
-                    @Override
-                    public void onCompleted() {
-                        Log.i(TAG,"request completed.....");
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.i(TAG,"request error.....");
-                    }
-
-                    @Override
-                    public void onNext(CategoryData categoryData) {
-                        if (categoryData != null) {
-                            for (Gank gank : categoryData.getDataList()) {
-                                Log.i(TAG,gank.getType()+":"+gank.getDesc());
-                            }
-                        }
-                    }
-                });
     }
 
     public Observable<GankData> getGankData(int year, int month, int day) {
@@ -115,5 +69,9 @@ public class NetworkRequest {
 
     public Observable<ZhihuHotData> getZhihuHotData() {
         return mZhihuApi.getZhihuHotData();
+    }
+
+    public Observable<ZhihuDetailData> getZhihuDetailData(int newsId) {
+        return mZhihuApi.getZhihuDetailData(newsId);
     }
 }

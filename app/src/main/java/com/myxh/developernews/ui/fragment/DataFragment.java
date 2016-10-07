@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,9 +17,12 @@ import com.cjj.MaterialRefreshListener;
 import com.myxh.developernews.GankDataType;
 import com.myxh.developernews.R;
 import com.myxh.developernews.bean.CategoryData;
-import com.myxh.developernews.bean.Gank;
+import com.myxh.developernews.ui.activity.ImageActivity;
+import com.myxh.developernews.ui.activity.WebActivity;
 import com.myxh.developernews.ui.adapter.DataListAdapter;
+import com.myxh.developernews.ui.adapter.GirlAdapter;
 import com.myxh.developernews.ui.base.BaseFragment;
+import com.myxh.developernews.ui.widget.ImageItemDecorator;
 import com.myxh.developernews.util.RxBinderUtil;
 import com.myxh.developernews.viewModel.CategoryDataViewModel;
 import com.orhanobut.logger.Logger;
@@ -30,7 +34,7 @@ import java.util.List;
 /**
  * Created by asus on 2016/8/10.
  */
-public class DataFragment extends BaseFragment {
+public class DataFragment extends BaseFragment implements DataListAdapter.OnItemClickListener, GirlAdapter.OnPictureClickLisenter {
 
     private static final String TAG = DataFragment.class.getSimpleName();
     private CategoryDataViewModel categoryDataViewModel;
@@ -38,8 +42,9 @@ public class DataFragment extends BaseFragment {
 
     private RecyclerView recyclerView;
     private MaterialRefreshLayout refreshLayout;
-    private List<Gank> datas = new ArrayList<>();
+    private ArrayList<CategoryData.ResultsBean> datas = new ArrayList<>();
     private DataListAdapter adapter;
+    private GirlAdapter mGirlAdapter;
 
     private String dataType;
     private int limit = 10,page = 1;
@@ -48,13 +53,13 @@ public class DataFragment extends BaseFragment {
     private boolean isFreshNew = false;
     private boolean isLoadMore = false;
 
-   public static DataFragment newFragment(String dataType) {
+    public static DataFragment newFragment(String dataType) {
        DataFragment dataFragment = new DataFragment();
        Bundle bundle = new Bundle();
        bundle.putString(DATA_TYPE,dataType);
        dataFragment.setArguments(bundle);
        return dataFragment;
-   }
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -68,16 +73,33 @@ public class DataFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View mainView = inflater.inflate(R.layout.fragment_data,container,false);
+        View mainView = inflater.inflate(R.layout.fragment_data,null);
         Log.i(TAG, "onCreateView: --------------------------"+dataType);
         initViews(mainView);
 
-        adapter = new DataListAdapter(datas,getActivity());
-        recyclerView.setAdapter(adapter);
-        recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
+        setupRecycleView();
 
+        isFreshNew = true;
         loadData();
+        adapter.setOnItemClickListener(this);
+        mGirlAdapter.setOnPictureClickLisenter(this);
         return mainView;
+    }
+
+    private void setupRecycleView() {
+        adapter = new DataListAdapter(datas,getActivity());
+        mGirlAdapter = new GirlAdapter(datas,getActivity());
+        if (dataType.equals(GankDataType.TYPE_GIRL)) {
+            StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL);
+            layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+            recyclerView.setHasFixedSize(true);//如果确定每个item的内容不会改变RecyclerView的大小，设置这个选项可以提高性能
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(mGirlAdapter);
+            recyclerView.addItemDecoration(new ImageItemDecorator(10));
+        } else {
+            recyclerView.setAdapter(adapter);
+            recyclerView.addItemDecoration(new HorizontalDividerItemDecoration.Builder(getActivity()).build());
+        }
     }
 
     @Override
@@ -99,7 +121,6 @@ public class DataFragment extends BaseFragment {
                 isFreshNew = true;
                 page = 1;
                 loadData();
-                materialRefreshLayout.finishRefresh();
             }
 
             @Override
@@ -107,7 +128,6 @@ public class DataFragment extends BaseFragment {
                 isLoadMore = true;
                 page++;
                 loadData();
-                materialRefreshLayout.finishRefreshLoadMore();
             }
         });
     }
@@ -137,22 +157,33 @@ public class DataFragment extends BaseFragment {
 
     private void setRepository(CategoryData categoryData) {
         Log.i(TAG, "setRepository: ---------------------------------------"+dataType);
-        if (categoryData == null || categoryData.getDataList() == null || categoryData.getDataList().size()==0) {
+        if (categoryData == null || categoryData.getResults() == null || categoryData.getResults().size()==0) {
             Toast.makeText(getActivity(),"没有数据！"+categoryData,Toast.LENGTH_SHORT).show();
-            Logger.i("categoryData.getDataList()= "+categoryData.getDataList()+"");
+            Logger.i("categoryData.getDataList()= "+categoryData.getResults()+"");
         } else {
             if (isFreshNew) {
                 isFreshNew = false;
-                adapter.setDatas(categoryData.getDataList());
-//                datas.clear();
-//                datas.addAll(categoryData.getDataList());
+                refreshLayout.finishRefresh();
+                datas.clear();
+                datas.addAll(categoryData.getResults());
             }
             if (isLoadMore) {
                 isLoadMore = false;
-                adapter.addDatas(categoryData.getDataList());
-//                datas.addAll(categoryData.getDataList());
+                refreshLayout.finishRefreshLoadMore();
+                datas.addAll(categoryData.getResults());
             }
+            adapter.addDatas(datas);
+            mGirlAdapter.addDatas(datas);
         }
     }
 
+    @Override
+    public void onItemClick(View view, int position) {
+        WebActivity.startWebActivity(getActivity(),datas.get(position));
+    }
+
+    @Override
+    public void onPictureClick(View view, int position) {
+        ImageActivity.startImageActivity(getActivity(), datas, position);
+    }
 }

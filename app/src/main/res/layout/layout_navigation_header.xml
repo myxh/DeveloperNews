@@ -14,12 +14,14 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         fresco:placeholderImage="@drawable/ic_account_circle_white_48dp"
-        fresco:roundAsCircle="true"/>
+        fresco:roundAsCircle="true"
+        android:visibility="gone"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/nav_header_tv_nickname"

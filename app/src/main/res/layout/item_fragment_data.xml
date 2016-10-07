@@ -4,21 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:layout_marginLeft="@dimen/app_item_paddingLR"
-    android:layout_marginRight="@dimen/app_item_paddingLR"
+    android:layout_margin="@dimen/app_item_paddingLR"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/item_fra_data_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/item_data_icon_width"
+        android:layout_height="@dimen/item_data_icon_height"
         android:src="@drawable/ic_type_csdn"/>
 
     <LinearLayout
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
         android:paddingStart="@dimen/item_data_paddingLeft"
         android:orientation="vertical">
 
@@ -26,14 +24,30 @@
             android:id="@+id/item_fra_data_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:lines="3"
+            android:ellipsize="end"
             tools:text="雅虎开源的一系列 UI 组件，目前只放出了图片选择器组件，做的相当棒，期待雅虎更多的分析。"/>
 
-        <TextView
-            android:id="@+id/item_fra_data_who"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/darker_gray"
-            tools:text="myxh"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/item_fra_data_who"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColor="@android:color/darker_gray"
+                tools:text="myxh"/>
+            <TextView
+                android:id="@+id/item_fra_data_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/darker_gray"
+                tools:text="2016.8.12"/>
+        </LinearLayout>
 
     </LinearLayout>
 

@@ -31,10 +31,10 @@ public abstract class ToolbarActivity extends BaseActivity {
         setContentView(getContentViewId());
 
         //设置透明状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
             layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
-        }
+        }*/
     }
 
     protected abstract int getContentViewId();

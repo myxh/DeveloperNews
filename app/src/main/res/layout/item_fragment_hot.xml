@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               xmlns:fresco="http://schemas.android.com/apk/res-auto"
               android:orientation="horizontal"
               android:layout_width="match_parent"
-              android:layout_height="wrap_content"
+              android:layout_height="match_parent"
               android:padding="10dp"
               android:background="@android:color/white">
 
@@ -18,11 +18,15 @@
 
     <TextView
         android:id="@+id/hot_item_tv_desc"
-        android:textColor="@android:color/black"
+        android:textColor="@color/title_text_color"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/hot_item_icon"
         tools:text="知乎精选"
         android:paddingLeft="8dp"
         android:textSize="18sp"/>
 
-</LinearLayout>
+</RelativeLayout>

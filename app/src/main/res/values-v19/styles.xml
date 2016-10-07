@@ -2,6 +2,9 @@
 <resources>
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!--设置状态栏为透明-->
-        <item name="android:windowTranslucentStatus">true</item>
+        <!--<item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>-->
+        <!--避免滑动退出时黑屏-->
+        <item name="android:windowIsTranslucent">true</item>
     </style>
 </resources>

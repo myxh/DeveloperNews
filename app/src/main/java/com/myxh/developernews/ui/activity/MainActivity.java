@@ -1,6 +1,5 @@
 package com.myxh.developernews.ui.activity;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,9 +16,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.myxh.developernews.GankDataType;
 import com.myxh.developernews.R;
 import com.myxh.developernews.ui.base.BaseActivity;
 import com.myxh.developernews.ui.fragment.CollectionFragment;
+import com.myxh.developernews.ui.fragment.DataFragment;
+import com.myxh.developernews.ui.fragment.GirlFragment;
 import com.myxh.developernews.ui.fragment.HomeFragment;
 import com.myxh.developernews.ui.fragment.HotFragment;
 
@@ -68,8 +70,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new CollectionFragment()).commit();
                 break;
             case 3:
+                getSupportFragmentManager().beginTransaction().replace(R.id.main_content,new GirlFragment()).commit();
                 break;
             case 4:
+
                 break;
         }
     }
@@ -77,10 +81,10 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     private void initUI() {
 
         //设置透明状态栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+//            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
+//        }
 
         initNavigationView();
     }
@@ -122,26 +126,27 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
                 drawer.closeDrawer(GravityCompat.START);
                 item.setChecked(true);
                 break;
-            case R.id.nav_collection:
+            /*case R.id.nav_collection:
                 currentFragmentIndex = 2;
                 replaceFragment();
                 drawer.closeDrawer(GravityCompat.START);
                 item.setChecked(true);
-                break;
+                break;*/
             case R.id.nav_girl:
                 currentFragmentIndex = 3;
                 replaceFragment();
                 drawer.closeDrawer(GravityCompat.START);
                 item.setChecked(true);
                 break;
-            case R.id.nav_video:
+            /*case R.id.nav_video:
                 currentFragmentIndex = 4;
                 replaceFragment();
                 drawer.closeDrawer(GravityCompat.START);
                 item.setChecked(true);
-                break;
+                break;*/
             case R.id.nav_settings:
                 openActivity(SettingsActivity.class);
+                item.setChecked(false);
                 break;
         }
         return false;
@@ -152,7 +157,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         long secondTime = System.currentTimeMillis();
         if (secondTime - firstTime > 2000) {
             Snackbar sb = Snackbar.make(mNavigationView, "再按一次退出", Snackbar.LENGTH_SHORT);
-            sb.getView().setBackgroundColor(Color.BLACK);
+            sb.getView().setBackgroundColor(getResources().getColor(R.color.colorAccent));
             sb.show();
             firstTime = secondTime;
         } else {

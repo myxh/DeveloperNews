@@ -1,11 +1,10 @@
 package com.myxh.developernews.bean;
 
-
 /**
- * Created by asus on 2016/8/6.
+ * Created by asus on 2016/9/23.
  */
-public class Gank {
 
+public class Gank {
     private String _id;
     private String createdAt;
     private String desc;
@@ -87,5 +86,4 @@ public class Gank {
     public void setWho(String who) {
         this.who = who;
     }
-
 }

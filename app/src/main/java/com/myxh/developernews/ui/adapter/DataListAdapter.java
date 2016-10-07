@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.myxh.developernews.R;
 import com.myxh.developernews.bean.CategoryData;
-import com.myxh.developernews.bean.Gank;
 import com.myxh.developernews.util.UrlUtil;
 
 import java.util.List;
@@ -20,23 +19,32 @@ import java.util.List;
  */
 public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<Gank> datas;
+    private List<CategoryData.ResultsBean> datas;
     private Context context;
     private String itemType;
     private static final int TYPE_HEADER = 0;
     private static final int TYPE_ITEM = 1;
 
-    public DataListAdapter(List<Gank> datas, Context context) {
+    private OnItemClickListener mOnItemClickListener;
+
+    public DataListAdapter(List<CategoryData.ResultsBean> datas, Context context) {
         this.datas = datas;
         this.context = context;
     }
 
-    public void setDatas(List<Gank> datas) {
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+    public void setDatas(List<CategoryData.ResultsBean> datas) {
         this.datas = datas;
         notifyDataSetChanged();
     }
 
-    public void addDatas(List<Gank> datas) {
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
+
+    public void addDatas(List<CategoryData.ResultsBean> datas) {
         this.datas.addAll(datas);
         notifyDataSetChanged();
     }
@@ -63,6 +71,12 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     setImageResource(UrlUtil.getUrlIcon(datas.get(position).getUrl()));
             ((DataItemViewHolder) holder).itemTitle.setText(datas.get(position).getDesc());
             ((DataItemViewHolder) holder).itemWho.setText(datas.get(position).getWho());
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnItemClickListener.onItemClick(holder.itemView, position);
+                }
+            });
         }
     }
 
@@ -89,12 +103,14 @@ public class DataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         public ImageView itemIcon;
         public TextView itemTitle;
         public TextView itemWho;
+        public TextView itemDate;
 
         public DataItemViewHolder(View itemView) {
             super(itemView);
             itemIcon = (ImageView) itemView.findViewById(R.id.item_fra_data_icon);
             itemTitle = (TextView) itemView.findViewById(R.id.item_fra_data_title);
             itemWho = (TextView) itemView.findViewById(R.id.item_fra_data_who);
+            itemDate = (TextView) itemView.findViewById(R.id.item_fra_data_date);
         }
     }
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DeveloperNews</string>
+    <string name="app_name">开发者新闻</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
     <string name="click_login">点击登录</string>
@@ -29,7 +29,7 @@
 
     <string name="action_resource">干货</string>
     <string name="action_collection">收藏</string>
-    <string name="action_girl">福利</string>
+    <string name="action_girl">妹纸</string>
     <string name="action_video">休息视频</string>
     <string name="action_settings">设置</string>
     <string name="gank_Android">Android</string>
@@ -44,6 +44,11 @@
     <string name="hot">热门</string>
     <string name="network_not_conntected">网络未连接，前往设置？</string>
     <string name="tips">温馨提示</string>
+    <string name="share">分享</string>
+    <string name="gank_Girl">福利</string>
+    <string name="current_version">当前版本</string>
+    <string name="clear_cache">清理缓存</string>
+    <string name="contract_author">联系作者</string>
 
 
 </resources>

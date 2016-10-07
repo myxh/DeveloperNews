@@ -23,7 +23,7 @@ public class BaseFragment extends Fragment {
             intent.putExtras(pBundle);
         }
         startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.push_left_in, R.anim.push_left_out);
+        getActivity().overridePendingTransition(0,0);
     }
 
     protected void openActivity(String pAction) {

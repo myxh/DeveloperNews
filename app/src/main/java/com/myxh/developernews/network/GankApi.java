@@ -1,5 +1,6 @@
 package com.myxh.developernews.network;
 
+import com.myxh.developernews.bean.AndroidData;
 import com.myxh.developernews.bean.CategoryData;
 import com.myxh.developernews.bean.GankData;
 import com.myxh.developernews.bean.GirlData;
@@ -25,6 +26,10 @@ public interface GankApi {
     @GET("data/Android/{limit}/{page}")
     Observable<CategoryData> getAndroidData(@Path("limit")int limit,
                                      @Path("page")int page);
+    @GET("data/Android/10/1")
+    Observable<AndroidData> getAndroid();
+
+
 //    @GET("/data/iOS/{limit}/{page}")
 //    Observable<GirlData> getIOSData(@Path("limit")int limit,
 //                                     @Path("page")int page);

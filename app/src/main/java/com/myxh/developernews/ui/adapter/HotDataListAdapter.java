@@ -17,10 +17,16 @@ import java.util.List;
 /**
  * Created by asus on 2016/9/20.
  */
-public class HotDataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class HotDataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
 
     private List<ZhihuHotData.RecentBean> dataList;
     private Context mContext;
+
+    private OnItemClickListener mOnItemClickListener;
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        mOnItemClickListener = onItemClickListener;
+    }
 
     public HotDataListAdapter(List<ZhihuHotData.RecentBean> dataList, Context context) {
         this.dataList = dataList;
@@ -41,6 +47,7 @@ public class HotDataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_fragment_hot,null);
         HotItemViewHolder hotItemViewHolder = new HotItemViewHolder(view);
+        view.setOnClickListener(this);
         return hotItemViewHolder;
     }
 
@@ -48,11 +55,17 @@ public class HotDataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ((HotItemViewHolder) holder).zhihuIcon.setImageURI(Uri.parse(dataList.get(position).getThumbnail()));
         ((HotItemViewHolder) holder).zhihuDesc.setText(dataList.get(position).getTitle());
+        holder.itemView.setTag(position);
     }
 
     @Override
     public int getItemCount() {
         return dataList.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        mOnItemClickListener.onItemClick(v, (Integer) v.getTag());
     }
 
     class HotItemViewHolder extends RecyclerView.ViewHolder {
@@ -64,5 +77,9 @@ public class HotDataListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             zhihuIcon = (SimpleDraweeView) itemView.findViewById(R.id.hot_item_icon);
             zhihuDesc = (TextView) itemView.findViewById(R.id.hot_item_tv_desc);
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
     }
 }

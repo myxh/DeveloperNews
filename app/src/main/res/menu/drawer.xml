@@ -14,18 +14,18 @@
             android:id="@+id/nav_hot"
             android:icon="@drawable/ic_bookmark_grey600_24dp"
             android:title="@string/action_hot" />
-        <item
+        <!--<item
             android:id="@+id/nav_collection"
             android:icon="@drawable/ic_bookmark_grey600_24dp"
-            android:title="@string/action_collection" />
+            android:title="@string/action_collection" />-->
         <item
             android:id="@+id/nav_girl"
             android:icon="@drawable/ic_bookmark_grey600_24dp"
             android:title="@string/action_girl" />
-        <item
+        <!--<item
             android:id="@+id/nav_video"
             android:icon="@drawable/ic_bookmark_grey600_24dp"
-            android:title="@string/action_video" />
+            android:title="@string/action_video" />-->
     </group>
     <group
         android:id="@+id/group_settings"

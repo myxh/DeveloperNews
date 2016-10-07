@@ -6,4 +6,12 @@ package com.myxh.developernews.bean;
 public class BaseData {
 
     public boolean error;
+
+    public boolean isError() {
+        return error;
+    }
+
+    public void setError(boolean error) {
+        this.error = error;
+    }
 }
