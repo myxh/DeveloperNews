@@ -11,7 +11,7 @@
  - ShareSDK第三方分享
 
 ##ScreenShots
-![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/0.png)
+![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/0.png)![首页](https://github.com/myxh/DeveloperNews/blob/master/screenshots/1.png)
 
 
 
