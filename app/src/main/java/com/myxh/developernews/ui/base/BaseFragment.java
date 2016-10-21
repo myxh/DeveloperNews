@@ -23,6 +23,7 @@ public class BaseFragment extends Fragment {
             intent.putExtras(pBundle);
         }
         startActivity(intent);
+        //取消系统转场动画
         getActivity().overridePendingTransition(0,0);
     }
 

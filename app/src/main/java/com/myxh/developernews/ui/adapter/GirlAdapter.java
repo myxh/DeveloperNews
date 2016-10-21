@@ -24,6 +24,9 @@ public class GirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private List<CategoryData.ResultsBean> mDataList;
     private OnPictureClickLisenter mOnPictureClickLisenter;
 
+    //记录列表是否正在滑动
+    private boolean isScrolling = false;
+
     public GirlAdapter(List<CategoryData.ResultsBean> dataList, Context context) {
         mDataList = dataList;
         mContext = context;
@@ -42,6 +45,14 @@ public class GirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         mOnPictureClickLisenter = onPictureClickLisenter;
     }
 
+    /**
+     * 设置滑动标志位
+     * @param isScrolling
+     */
+    public void setScrollingState(boolean isScrolling) {
+        this.isScrolling = isScrolling;
+    }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_fragment_girl,parent,false);
@@ -52,7 +63,9 @@ public class GirlAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (holder instanceof GirlItemViewHolder) {
             String url = mDataList.get(position).getUrl();
-            ((GirlItemViewHolder) holder).mDraweeView.setImageURI(Uri.parse(url));
+            if (!isScrolling) {
+                ((GirlItemViewHolder) holder).mDraweeView.setImageURI(Uri.parse(url));
+            }
             ((GirlItemViewHolder) holder).mDraweeView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

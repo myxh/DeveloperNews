@@ -114,6 +114,22 @@ public class DataFragment extends BaseFragment implements DataListAdapter.OnItem
         recyclerView = (RecyclerView) view.findViewById(R.id.fra_data_recycleView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    mGirlAdapter.setScrollingState(false);
+                    mGirlAdapter.notifyDataSetChanged();
+                } else {
+                    mGirlAdapter.setScrollingState(true);
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+        });
         refreshLayout = (MaterialRefreshLayout) view.findViewById(R.id.fra_data_refreshLayout);
         refreshLayout.setMaterialRefreshListener(new MaterialRefreshListener() {
             @Override
@@ -159,7 +175,6 @@ public class DataFragment extends BaseFragment implements DataListAdapter.OnItem
         Log.i(TAG, "setRepository: ---------------------------------------"+dataType);
         if (categoryData == null || categoryData.getResults() == null || categoryData.getResults().size()==0) {
             Toast.makeText(getActivity(),"没有数据！"+categoryData,Toast.LENGTH_SHORT).show();
-            Logger.i("categoryData.getDataList()= "+categoryData.getResults()+"");
         } else {
             if (isFreshNew) {
                 isFreshNew = false;
