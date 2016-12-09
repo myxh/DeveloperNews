@@ -10,19 +10,20 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/web_appbar"
-        android:fitsSystemWindows="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@null">
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize">
+            android:layout_height="wrap_content">
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/web_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:fitsSystemWindows="false"
+                android:layout_height="wrap_content"
+                android:minHeight="?attr/actionBarSize"
+                android:fitsSystemWindows="true"
+                android:paddingTop="@dimen/toolbar_padding_top"
                 android:background="@color/colorAccent"
                 app:theme="@style/Theme.AppCompat.Light.DarkActionBar"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />

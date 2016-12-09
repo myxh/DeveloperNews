@@ -75,6 +75,8 @@ public class ZhihuDetailActivity extends BaseSwipeBackActivity implements Reveal
         initViews(savedInstanceState);
     }
 
+    private static void aff(){short y = 6;}
+
     @Override
     protected int getContentViewId() {
         return R.layout.activity_zhihu_detail;
@@ -82,9 +84,9 @@ public class ZhihuDetailActivity extends BaseSwipeBackActivity implements Reveal
 
     private void initViews(Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
-//            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
-//            setTranslucentStatus(true);
+            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+            layoutParams.flags = WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags;
+            setTranslucentStatus(true);
         }
         if (mToolbar != null) {
             setSupportActionBar(mToolbar);

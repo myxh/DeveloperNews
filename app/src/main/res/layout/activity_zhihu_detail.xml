@@ -27,7 +27,8 @@
             app:collapsedTitleTextAppearance="@style/TextAppearance.AppCompat.Body1"
             app:contentScrim="@color/colorAccent"
             app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Display1"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:statusBarScrim="@android:color/transparent"><!--设置状态栏透明-->
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/detail_iv_title"
@@ -41,7 +42,8 @@
             <android.support.v7.widget.Toolbar
                 android:id="@+id/detail_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="81dp"
+                android:fitsSystemWindows="true"
                 android:gravity="center"
                 app:layout_collapseMode="pin"/>
 
